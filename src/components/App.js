@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
 import UserContext from "../context/UserContext";
-import Login from "./Login";
+import SignIn from "./authentication/SignIn";
+import SignUp from "./authentication/SignUp";
 import HomePage from "./home/HomePage";
-import Register from "./Register";
-import Today from "./Today/Today";
-import Habits from "./Habits/Habits";
-import History from "./History";
 
 export default function App () {
   const [progressHabits, setProgressHabits] = useState(0);
@@ -18,27 +15,27 @@ export default function App () {
       <BrowserRouter >
         <UserContext.Provider value={{ progressHabits, setProgressHabits }}>
           <Routes >
-            <Route path="/" element={<Login />} />
-            <Route path="/cadastro" element={<Register />} />
+            <Route path="/" element={<SignIn />} />
+            <Route path="/cadastro" element={<SignUp />} />
             <Route
               path="/hoje"
               element={
                 <HomePage>
-                  <Today />
+                  
                 </HomePage>
               } />
             <Route
               path="/habitos"
               element={
                 <HomePage>
-                  <Habits />
+                  
                 </HomePage>
               } />
               <Route
               path="/historico"
               element={
                 <HomePage>
-                  <History />
+                  
                 </HomePage>
               } />
           </Routes>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { loginUser } from "../services/APIs.js";
-import logo from "../assets/img/trackit-logo.png";
-import { AuthScreen, Button, Input, Loading } from "./common";
+import { loginUser } from "../../services/APIs.js";
+import logo from "../../assets/img/linkr-logo.png";
+import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
-export default function Login () {
+export default function SignIn () {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const authData = JSON.parse(localStorage.getItem("userData"));

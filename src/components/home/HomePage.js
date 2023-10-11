@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
-import Footer from "./Footer";
 import UserContext from "../../context/UserContext";
 import { getTodayHabits } from "../../services/APIs";
 
@@ -27,7 +26,6 @@ export default function HomePage ({ children }) {
       <Private>
         <Header name={authData.name} image={authData.image} />
           {children}
-        <Footer />
       </Private>
       : <Navigate to="/" />}
     </>

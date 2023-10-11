@@ -11,13 +11,13 @@ export default function AuthScreen ( {children} ) {
 const Main = styled.main`
 width: 100%;
 height: 100vh;
-background-color: #FFFFFF;
+background-color: #333333;
 display: flex;
 flex-direction: column;
 align-items: center;
 img {
-  width: 180px;
-  height: 178px;
+  width: 233px;
+  height: 117px;
   margin-top: 68px;
 }
 form {
