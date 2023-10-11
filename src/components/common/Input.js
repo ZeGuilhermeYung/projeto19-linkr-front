@@ -32,37 +32,38 @@ export default function Input ( {type, name, onChange, value, placeholder, disab
 
 const Wrapper = styled.input`
 width: 100%;
-height: 45px;
-font-family: 'Lexend Deca', sans-serif;
+height: 65px;
+font-family: 'Oswald';
+font-size: 27px;
 font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 25px;
-color: #666666;
+font-weight: 700;
+line-height: normal;
+color: #000000;
 background-color: #FFFFFF;
 border: 1px solid #D5D5D5;
-border-radius: 5px;
-padding-left: 11px;
-margin-bottom: 6px;
+border-radius: 6px;
+padding-left: 17px;
+padding-bottom: 8px;
+margin-bottom: 13px;
 box-sizing: border-box;
 
 :focus-visible {
  outline: none;
 }
-::placeholder, :-webkit-autofill {
-  font-family: 'Lexend Deca', sans-serif;
+::placeholder, ::-webkit-input-placeholder, :-webkit-autofill {
+  font-family: 'Oswald';
+  font-size: 27px;
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 25px;
-  color: #DBDBDB;
+  font-weight: 700;
+  line-height: normal;
+  color: #9F9F9F;
 }
 :-webkit-autofill {
   background-color: #52B6FF;
   opacity: 0.7;
 }
 :disabled {
-  color: #AFAFAF;
+  color: #9F9F9F;
   background-color: #F2F2F2;
 }
 `;
@@ -74,6 +75,6 @@ ion-icon {
   font-size: 30px;
   color: #DBDBDB;
   position: absolute;
-  bottom: 13px;
-  right: 15px;
+  bottom: 30px;
+  right: 17px;
 }`;

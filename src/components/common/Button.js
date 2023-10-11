@@ -14,10 +14,10 @@ width: ${props => (
   : (props.size === "small") ? "84px"
   : "40px")};
 height: ${props => (
-  (props.size === "large") ? "45px"
+  (props.size === "large") ? "65px"
   : "35px")};
-background-color: #52B6FF;
-border-radius: 5px;
+border-radius: 6px;
+background: #1877F2;
 cursor: pointer;
 display: flex;
 align-items: center;
@@ -26,13 +26,17 @@ box-sizing: border-box;
 
 p {
   font-size: ${props => (
-  (props.size === "large") ? "21px"
+  (props.size === "large") ? "27px"
   : (props.size === "small") ? "16px"
   : "27px")};
   line-height: ${props => (
-  (props.size === "large") ? "26px"
+  (props.size === "large") ? "normal"
   : (props.size === "small") ? "20px"
   : "27px")};
+  font-weight: ${props => (
+  (props.size === "large") ? "700"
+  : (props.size === "small") ? "normal"
+  : "700")};
   text-align: center;
   color: #FFFFFF;
 }`;

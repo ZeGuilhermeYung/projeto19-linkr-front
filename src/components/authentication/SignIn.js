@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/APIs.js";
-import logo from "../../assets/img/linkr-logo.png";
 import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
 export default function SignIn () {
@@ -38,14 +37,13 @@ export default function SignIn () {
     <>
       {authData ? <Navigate to="/hoje" />
         : <AuthScreen>
-            <img src={logo} alt="logo do Track It" />
             <form onSubmit={handleSubmit} >
-              <Input type="email" name="email" onChange={handleInput} value={form.email} placeholder="email" disabled={disabled} />
-              <Input type="password" name="password" onChange={handleInput} value={form.password} placeholder="senha" disabled={disabled} />
-              {disabled ? <Loading size="large" /> : <Button title="Entrar" size="large" disabled={disabled} />}
+              <Input type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
+              <Input type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
+              {disabled ? <Loading size="large" /> : <Button title="Log In" size="large" disabled={disabled} />}
             </form>
             <Link to="/cadastro" >
-              <h6>Não tem uma conta? Cadastre-se!</h6>
+              <h6>First time? Create an account!</h6>
             </Link> 
           </AuthScreen>}
     </>

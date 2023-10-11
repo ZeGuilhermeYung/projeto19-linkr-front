@@ -59,16 +59,18 @@ button {
 body {
   width: 100%;
   background-color: #F2F2F2;
-  font-family: 'Lexend Deca', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-style: normal;
   font-weight: 400;
 }
 h1 {
-  font-family: 'Playball', cursive;
-  font-size: 39px;
-  line-height: 49px;
-  text-align: center;
   color: #FFFFFF;
+  font-family: 'Passion One';
+  font-size: 106px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 5.3px;
 }
 h2 {
   font-size: 23px;

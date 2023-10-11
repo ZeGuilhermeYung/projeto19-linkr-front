@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/APIs.js";
-import logo from "../../assets/img/linkr-logo.png";
 import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
 export default function SignUp () {
@@ -39,7 +38,6 @@ export default function SignUp () {
 
   return (
     <AuthScreen>
-      <img src={logo} alt="logo do Track It" />
       <form onSubmit={handleSubmit} >
         <Input type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
         <Input type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
