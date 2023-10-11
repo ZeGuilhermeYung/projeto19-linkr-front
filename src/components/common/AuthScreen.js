@@ -5,7 +5,7 @@ export default function AuthScreen ( {children} ) {
     <Main>
       <BannerSection>
         <Banner>
-          <h1>linkr</h1>
+          <Title>linkr</Title>
           <Slogan>
             <SloganText>save, share and discover<br/>the best links on the web</SloganText>
           </Slogan>
@@ -38,6 +38,10 @@ margin-top: 301px;
 margin-left: 144px;
 display: flex;
 flex-direction: column;`
+
+const Title = styled.h1`
+font-size: 106px;
+letter-spacing: 5.3px;`
 
 const Slogan = styled.div`
 height: 128px;

@@ -38,7 +38,7 @@ font-size: 27px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
-color: #000000;
+color: #151515;
 background-color: #FFFFFF;
 border: 1px solid #D5D5D5;
 border-radius: 6px;
@@ -49,14 +49,6 @@ box-sizing: border-box;
 
 :focus-visible {
  outline: none;
-}
-::placeholder, ::-webkit-input-placeholder, :-webkit-autofill {
-  font-family: 'Oswald';
-  font-size: 27px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  color: #9F9F9F;
 }
 :-webkit-autofill {
   background-color: #52B6FF;

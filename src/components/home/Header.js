@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Header ( {name, image} ) {
   return (
     <Top>
-      <h1>TrackIt</h1>
+      <h1>linkr</h1>
       <div>
         <h6>Olá,<br/>{name}!</h6>
         <img src={image} alt="" />
@@ -15,9 +15,9 @@ export default function Header ( {name, image} ) {
 const Top = styled.header`
 width: 100%;
 height: 70px;
-background-color: #126BA5;
+background-color: #151515;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-padding: 10px 18px;
+padding: 10px 18px 10px 28px;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -45,7 +45,7 @@ div h6 {
   height: auto;
   max-width: 200px;
   max-height: 50px;
-  color: #FFFFFF;
+  font-size: 14px;
   text-align: center;
   margin-right: 10px;
   overflow: hidden;

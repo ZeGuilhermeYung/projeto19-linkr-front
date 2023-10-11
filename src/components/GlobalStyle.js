@@ -58,45 +58,49 @@ button {
 
 body {
   width: 100%;
-  background-color: #F2F2F2;
+  background-color: #333333;
   font-family: 'Oswald', sans-serif;
   font-style: normal;
   font-weight: 400;
+  line-height: normal;
 }
 h1 {
   color: #FFFFFF;
   font-family: 'Passion One';
-  font-size: 106px;
-  font-style: normal;
+  font-size: 49px;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 5.3px;
+  letter-spacing: 2.45px;
 }
 h2 {
-  font-size: 23px;
-  line-height: 29px;
-  color: #126BA5;
+  color: #FFFFFF;
+  font-size: 43px;
+  font-weight: 700;
 }
 h3 {
-  font-size: 18px;
-  line-height: 22px;
-  color: #666666;
+  color: #FFFFFF;
+  font-size: 27px;
+  font-weight: 700;
 }
 h4 {
-  font-size: 20px;
-  line-height: 25px;
-  color: #666666;
+  color: #FFFFFF;
+  font-family: 'Lato';
+  font-size: 19px;
 }
 h5 {
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  color: #52B6FF;
+  color: #B7B7B7;
+  font-family: 'Lato';
+  font-size: 17px;
 }
 h6 {
-  font-size: 13px;
-  line-height: 16px;
-  color: #666666;
+  color: #FFFFFF;
+  text-align: center;
+  font-family: 'Lato';
+  font-size: 11px;
+}
+::placeholder, ::-webkit-input-placeholder, :-webkit-autofill {
+  font-size: 27px;
+  font-weight: 700;
+  color: #9F9F9F;
 }
 `;
  
