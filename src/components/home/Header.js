@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export default function Header ( {name, image} ) {
+export default function Header ( {username, photo} ) {
   return (
     <Top>
       <h1>linkr</h1>
       <div>
-        <h6>Olá,<br/>{name}!</h6>
-        <img src={image} alt="" />
+        <h6>Olá,<br/>{username}!</h6>
+        <img src={photo} alt="" />
       </div>
     </Top>
   );

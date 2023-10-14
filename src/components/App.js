@@ -1,38 +1,27 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
+import AuthContext from "../context/AuthContext";
 import UserContext from "../context/UserContext";
 import SignIn from "./authentication/SignIn";
 import SignUp from "./authentication/SignUp";
 import HomePage from "./home/HomePage";
 
 export default function App () {
+  const [token, setToken] = useState(localStorage.getItem("userData"));
   const [progressHabits, setProgressHabits] = useState(0);
   
   return (
     <>
       <GlobalStyle />
       <BrowserRouter >
+        <AuthContext.Provider value={{ token, setToken }}>
         <UserContext.Provider value={{ progressHabits, setProgressHabits }}>
           <Routes >
             <Route path="/" element={<SignIn />} />
-            <Route path="/cadastro" element={<SignUp />} />
+            <Route path="/sign-up" element={<SignUp />} />
             <Route
-              path="/hoje"
-              element={
-                <HomePage>
-                  
-                </HomePage>
-              } />
-            <Route
-              path="/habitos"
-              element={
-                <HomePage>
-                  
-                </HomePage>
-              } />
-              <Route
-              path="/historico"
+              path="/timeline"
               element={
                 <HomePage>
                   
@@ -40,6 +29,7 @@ export default function App () {
               } />
           </Routes>
         </UserContext.Provider>
+        </AuthContext.Provider>
       </BrowserRouter>
     </>
   );

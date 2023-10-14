@@ -2,29 +2,20 @@ import { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
-import UserContext from "../../context/UserContext";
-import { getTodayHabits } from "../../services/APIs";
+//import UserContext from "../../context/UserContext";
+//import { getTodayHabits } from "../../services/APIs";
 
 export default function HomePage ({ children }) {
   require("dayjs/locale/pt-br");
   const authData = JSON.parse(localStorage.getItem("userData"));
-  const { progressHabits, setProgressHabits } = useContext(UserContext);
+ // const { progressHabits, setProgressHabits } = useContext(UserContext);
 
-  useEffect(() => {
-		getTodayHabits()
-      .catch((error) => {
-        alert(error.message);
-      })
-      .then((habits) => {
-        setProgressHabits(Math.round((habits.data.filter(habit => habit.done).length / habits.data.length) * 100));
-      });
-    }, [progressHabits]);
 
   return (
     <>
     {authData ? 
       <Private>
-        <Header name={authData.name} image={authData.image} />
+        <Header username={authData.username} photo={authData.photo} />
           {children}
       </Private>
       : <Navigate to="/" />}

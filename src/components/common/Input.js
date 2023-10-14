@@ -51,7 +51,7 @@ box-sizing: border-box;
  outline: none;
 }
 :-webkit-autofill {
-  background-color: #52B6FF;
+  background-color: #1877F2;
   opacity: 0.7;
 }
 :disabled {

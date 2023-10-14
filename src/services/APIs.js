@@ -1,69 +1,74 @@
 import axios from "axios";
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/AuthContext";
 
-function userHeaders () {
-  const authToken = JSON.parse(localStorage.getItem("userData"));
-  const userToken = {
-    headers: {
-      Authorization: `Bearer ${authToken.token}`
+const urlAPI = process.env.REACT_APP_API_URL;
+
+function UserHeaders () {
+  const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
-  };
-  return userToken;
+    return config;
+  }, []);
 }
 
-const urlAPI = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
-
-function registerUser (body) {
-  const promise = axios.post(`${urlAPI}/auth/sign-up`, body);
+function signUpUser (body) {
+  const promise = axios.post(`${urlAPI}/sign-up`, body);
   return promise;
 }
 
-function loginUser (body) {
-  const promise = axios.post(`${urlAPI}/auth/login`, body);
+function signInUser (body) {
+  const promise = axios.post(`${urlAPI}/`, body);
   return promise;
 }
 
 function getTodayHabits () {
-  const userToken = userHeaders();
-  const promise = axios.get(`${urlAPI}/habits/today`, userToken);
+  const config = UserHeaders();
+  const promise = axios.get(`${urlAPI}/habits/today`, config);
   return promise;
 }
 
 function getHabits () {
-  const userToken = userHeaders();
-  const promise = axios.get(`${urlAPI}/habits`, userToken);
+  const config = UserHeaders();
+  const promise = axios.get(`${urlAPI}/habits`, config);
   return promise;
 }
 
 function postNewHabit (body) {
-  const userToken = userHeaders();
-  const promise = axios.post(`${urlAPI}/habits`, body, userToken);
+  const config = UserHeaders();
+  const promise = axios.post(`${urlAPI}/habits`, body, config);
   return promise;
 }
 
 function deleteHabit(habitId) {
-  const userToken = userHeaders();
-  const promise = axios.delete(`${urlAPI}/habits/${habitId}`, userToken);
+  const config = UserHeaders();
+  const promise = axios.delete(`${urlAPI}/habits/${habitId}`, config);
   return promise;
 }
 
 function checkHabit (habitId) {
-  const userToken = userHeaders();
+  const config = UserHeaders();
   const body = {};
-  const promise = axios.post(`${urlAPI}/habits/${habitId}/check`, body, userToken);
+  const promise = axios.post(`${urlAPI}/habits/${habitId}/check`, body, config);
   return promise;
 }
 
 function uncheckHabit (habitId) {
-  const userToken = userHeaders();
+  const config = UserHeaders();
   const body = {};
-  const promise = axios.post(`${urlAPI}/habits/${habitId}/uncheck`, body, userToken);
+  const promise = axios.post(`${urlAPI}/habits/${habitId}/uncheck`, body, config);
   return promise;
 }
 
 function getHistory() {
-  const userToken = userHeaders();
-  const promise = axios.get(`${urlAPI}/habits/history/daily`, userToken);
+  const config = UserHeaders();
+  const promise = axios.get(`${urlAPI}/habits/history/daily`, config);
   return promise;
 }
 
-export { userHeaders, loginUser, registerUser, getTodayHabits, getHabits, postNewHabit, deleteHabit, checkHabit, uncheckHabit, getHistory }
+export { UserHeaders, signInUser, signUpUser, getTodayHabits, getHabits, postNewHabit, deleteHabit, checkHabit, uncheckHabit, getHistory }
