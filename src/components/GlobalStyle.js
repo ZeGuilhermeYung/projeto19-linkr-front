@@ -52,6 +52,7 @@ table {
 }
 button {
   all: unset;
+  cursor: pointer;
 }
 
 ///////// Global configuration //////////////

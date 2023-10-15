@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
@@ -8,14 +8,29 @@ import Header from "./Header";
 export default function HomePage ({ children }) {
   require("dayjs/locale/pt-br");
   const authData = JSON.parse(localStorage.getItem("userData"));
+  const [logoutButton, setLogoutButton] = useState(false);
  // const { progressHabits, setProgressHabits } = useContext(UserContext);
+  const privateRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (logoutButton && privateRef.current && !privateRef.current.contains(event.target)) {
+        setLogoutButton(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [logoutButton]);
 
   return (
     <>
     {authData ? 
-      <Private>
-        <Header username={authData.username} photo={authData.photo} />
+      <Private ref={privateRef} onClick={() => {if (logoutButton) setLogoutButton(false)}}>
+        <Header username={authData.username} photo={authData.photo} logoutButton={logoutButton} setLogoutButton={setLogoutButton} />
           {children}
       </Private>
       : <Navigate to="/" />}
@@ -73,5 +88,4 @@ span h5 {
 }
 main ul {
   display: flex;
-}
-`;
+}`;

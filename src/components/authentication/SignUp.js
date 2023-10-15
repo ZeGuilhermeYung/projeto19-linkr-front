@@ -22,12 +22,12 @@ export default function SignUp () {
     setDisabled(true);
 
     signUpUser(form)
+      .then(() => {
+        navigate("/");
+      })
       .catch((error) => {
         alert(error.message);
         setDisabled(false);
-      })
-      .then(() => {
-        navigate("/");
       });
   }
 

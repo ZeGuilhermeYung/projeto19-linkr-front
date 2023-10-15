@@ -1,14 +1,34 @@
 import styled from "styled-components";
+import AuthContext from "../../context/AuthContext";
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-export default function Header ( {username, photo} ) {
+export default function Header ( {username, photo, logoutButton, setLogoutButton} ) {
+  const { setToken } = useContext(AuthContext);
+  
+  function logout() {
+    localStorage.removeItem("userData");
+    setToken(undefined);
+  }
+
   return (
-    <Top>
-      <h1>linkr</h1>
-      <div>
-        <h6>Olá,<br/>{username}!</h6>
-        <img src={photo} alt="" />
-      </div>
-    </Top>
+    <div>
+      <Top>
+        <h1>linkr</h1>
+        <button onClick={() => setLogoutButton(!logoutButton)} >
+          { !logoutButton ? <UpArrow/> : <DownArrow/> }
+          <h6>Olá,<br/>{username}!</h6>
+          <img data-test="avatar" src={photo} alt="" />
+        </button>
+      </Top>
+      {logoutButton ?
+      <Link to="/">
+        <Logout data-test="menu" onClick={() => logout()} >
+          <h4 data-test="logout">Logout</h4>
+        </Logout>
+      </Link>  : null}     
+    </div>
   );
 }
 
@@ -27,20 +47,23 @@ top: 0px;
 z-index: 5;
 box-sizing: border-box;
 
-div {
+button {
   width: auto;
   height: auto;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-div img {
+
+button img {
   width: 51px;
   height: 51px;
   border-radius: 50%;
   object-fit: cover;
 }
-div h6 {
+
+button h6 {
   width: auto;
   height: auto;
   max-width: 200px;
@@ -50,4 +73,38 @@ div h6 {
   margin-right: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+}`
+
+const DownArrow = styled(MdKeyboardArrowDown)`
+  font-size: 40px;
+  color: #FFFFFF;
+  margin-right: 10px;`
+
+const UpArrow = styled(MdKeyboardArrowUp)`
+  font-size: 40px;
+  color: #FFFFFF;
+  margin-right: 10px;`
+
+const Logout = styled.button`
+  width: 150px;
+  height: 47px;
+  background-color: #171717;
+  border-radius: 0 0 0 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  padding-bottom: 9px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 0px;
+  top: 70px;
+  z-index: 5;
+  box-sizing: border-box;
+  
+div h4 {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.85px;
 }`;

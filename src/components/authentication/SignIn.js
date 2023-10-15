@@ -5,7 +5,7 @@ import { signInUser } from "../../services/APIs.js";
 import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
 export default function SignIn () {
-  const { token, setToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const authData = JSON.parse(localStorage.getItem("userData"));
@@ -24,7 +24,6 @@ export default function SignIn () {
 
     signInUser(form)
       .then((res) => {
-        localStorage.clear();
         setToken(res.data.token);
         const userAuth = JSON.stringify({
           token: res.data.token,
