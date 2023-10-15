@@ -40,8 +40,8 @@ export default function SignUp () {
         <Input dataTest="picture-url" type="url" name="photo" onChange={handleInput} value={form.photo} placeholder="picture url" disabled={disabled} />
         {disabled ? <Loading size="large" /> : <Button dataTest="sign-up-btn" title="Sign Up" size="large" disabled={disabled} />}
       </form>
-      <Link dataTest="login-link" to="/" >
-        <h6>Switch back to log in</h6>
+      <Link to="/" >
+        <h6 dataTest="login-link">Switch back to log in</h6>
       </Link>
     </AuthScreen>
   );
