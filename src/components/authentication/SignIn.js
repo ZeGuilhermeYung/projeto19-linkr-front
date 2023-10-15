@@ -48,8 +48,8 @@ export default function SignIn () {
               <Input dataTest="password" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
               {disabled ? <Loading size="large" /> : <Button dataTest="login-btn" title="Log In" size="large" disabled={disabled} />}
             </form>
-            <Link to="/sign-up" >
-              <h6 dataTest="sign-up-link">First time? Create an account!</h6>
+            <Link data-test="sign-up-link" to="/sign-up" >
+              <h6>First time? Create an account!</h6>
             </Link> 
           </AuthScreen>}
     </>
