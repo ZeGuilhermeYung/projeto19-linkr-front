@@ -34,13 +34,13 @@ export default function SignUp () {
   return (
     <AuthScreen>
       <form onSubmit={handleSubmit} >
-        <Input data-test="email" type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
-        <Input data-test="password" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
-        <Input data-test="username" type="text" name="username" onChange={handleInput} value={form.username} placeholder="username" disabled={disabled} />
-        <Input data-test="picture-url" type="url" name="photo" onChange={handleInput} value={form.photo} placeholder="picture url" disabled={disabled} />
-        {disabled ? <Loading size="large" /> : <Button data-test="sign-up-btn" title="Sign Up" size="large" disabled={disabled} />}
+        <Input dataTest="email" type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
+        <Input dataTest="password" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
+        <Input dataTest="username" type="text" name="username" onChange={handleInput} value={form.username} placeholder="username" disabled={disabled} />
+        <Input dataTest="picture-url" type="url" name="photo" onChange={handleInput} value={form.photo} placeholder="picture url" disabled={disabled} />
+        {disabled ? <Loading size="large" /> : <Button dataTest="sign-up-btn" title="Sign Up" size="large" disabled={disabled} />}
       </form>
-      <Link data-test="login-link" to="/" >
+      <Link dataTest="login-link" to="/" >
         <h6>Switch back to log in</h6>
       </Link>
     </AuthScreen>
