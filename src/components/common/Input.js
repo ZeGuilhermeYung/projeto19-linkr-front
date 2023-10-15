@@ -1,7 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function Input ( {type, name, onChange, value, placeholder, disabled} ) {
+export default function Input ( {
+  dataTest,
+  type,
+  name,
+  onChange,
+  value,
+  placeholder,
+  disabled} ) {
   const [visible, setVisible] = useState("eye-off-outline");
   const [visiblePassword, setVisiblePassword] = useState("password");
 
@@ -17,14 +24,43 @@ export default function Input ( {type, name, onChange, value, placeholder, disab
   return (
     <>
       {type === "url" ? 
-      <Wrapper type={type} name={name} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} />
+      <Wrapper
+        data-test={dataTest}
+        type={type}
+        name={name}
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+        disabled={disabled}
+      />
       : name === "password" ? 
       <Div>
-        <Wrapper type={visiblePassword} name={name} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} required />
-        <ion-icon name={visible} onClick={showPassword} ></ion-icon>
+        <Wrapper
+          data-test={dataTest}
+          type={visiblePassword}
+          name={name}
+          onChange={onChange}
+          value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          required
+        />
+        <ion-icon
+          name={visible}
+          onClick={showPassword} >
+        </ion-icon>
       </Div>
       :
-      <Wrapper type={type} name={name} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} required />
+      <Wrapper
+        data-test={dataTest}
+        type={type}
+        name={name}
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+        disabled={disabled}
+        required
+      />
       }  
     </>
   );

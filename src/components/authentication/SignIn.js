@@ -31,11 +31,9 @@ export default function SignIn () {
           photo: res.data.photo
         });
         localStorage.setItem("userData", userAuth);
-        console.log(userAuth);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
         alert(error.message);
         setDisabled(false);
       });
@@ -47,7 +45,7 @@ export default function SignIn () {
         : <AuthScreen>
             <form onSubmit={handleSubmit} >
               <Input data-test="email" type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
-              <Input data-test="email" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
+              <Input data-test="password" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
               {disabled ? <Loading size="large" /> : <Button data-test="login-btn" title="Log In" size="large" disabled={disabled} />}
             </form>
             <Link data-test="sign-up-link" to="/sign-up" >

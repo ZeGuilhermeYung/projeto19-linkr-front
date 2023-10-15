@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
+import { LogoutMenu } from "../common";
 //import UserContext from "../../context/UserContext";
 //import { getTodayHabits } from "../../services/APIs";
 
@@ -29,8 +30,15 @@ export default function HomePage ({ children }) {
   return (
     <>
     {authData ? 
-      <Private ref={privateRef} onClick={() => {if (logoutButton) setLogoutButton(false)}}>
-        <Header username={authData.username} photo={authData.photo} logoutButton={logoutButton} setLogoutButton={setLogoutButton} />
+      <Private
+        ref={privateRef} 
+        onClick={() => {if (logoutButton) setLogoutButton(false)}} >
+        <Header
+          username={authData.username}
+          photo={authData.photo}
+          logoutButton={logoutButton}
+          setLogoutButton={setLogoutButton}/>
+        <LogoutMenu logoutButton={logoutButton} />
           {children}
       </Private>
       : <Navigate to="/" />}

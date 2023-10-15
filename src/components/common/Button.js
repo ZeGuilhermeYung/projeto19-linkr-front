@@ -1,8 +1,19 @@
 import styled from "styled-components";
 
-export default function Button ( {title, size, disabled, clickFunction} ) {
+export default function Button ( {
+  dataTest,
+  title,
+  size,
+  disabled,
+  clickFunction} ) {
   return (
-    <Wrapper title={title} size={size} onClick={clickFunction} disabled={disabled} >
+    <Wrapper
+      data-test={dataTest}
+      title={title}
+      size={size}
+      onClick={clickFunction}
+      disabled={disabled}
+    >
       <p>{title}</p>
     </Wrapper>
   );
