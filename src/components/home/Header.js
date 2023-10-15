@@ -24,8 +24,10 @@ export default function Header ( {username, photo, logoutButton, setLogoutButton
       </Top>
       {logoutButton ?
       <Link to="/">
-        <Logout data-test="menu" onClick={() => logout()} >
-          <h4 data-test="logout">Logout</h4>
+        <Logout data-test="menu" >
+          <div data-test="logout" onClick={() => logout()}>
+            <h4>Logout</h4>
+          </div>
         </Logout>
       </Link>  : null}     
     </div>
@@ -85,14 +87,12 @@ const UpArrow = styled(MdKeyboardArrowUp)`
   color: #FFFFFF;
   margin-right: 10px;`
 
-const Logout = styled.button`
+const Logout = styled.section`
   width: 150px;
   height: 47px;
   background-color: #171717;
   border-radius: 0 0 0 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  padding-bottom: 9px;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,6 +101,16 @@ const Logout = styled.button`
   top: 70px;
   z-index: 5;
   box-sizing: border-box;
+
+div {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  padding-bottom: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
 div h4 {
   font-size: 17px;
