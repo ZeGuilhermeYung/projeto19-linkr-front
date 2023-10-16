@@ -1,16 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../context/UserContext";
 import Header from "./Header";
 import { LogoutMenu } from "../common";
-//import UserContext from "../../context/UserContext";
-//import { getTodayHabits } from "../../services/APIs";
+import { Posts } from "../common";
 
 export default function HomePage ({ children }) {
   require("dayjs/locale/pt-br");
-  const authData = JSON.parse(localStorage.getItem("userData"));
+  const { authData } = useContext(UserContext);
   const [logoutButton, setLogoutButton] = useState(false);
- // const { progressHabits, setProgressHabits } = useContext(UserContext);
   const privateRef = useRef(null);
 
   useEffect(() => {
@@ -34,22 +33,26 @@ export default function HomePage ({ children }) {
         ref={privateRef} 
         onClick={() => {if (logoutButton) setLogoutButton(false)}} >
         <Header
-          username={authData.username}
-          photo={authData.photo}
           logoutButton={logoutButton}
           setLogoutButton={setLogoutButton}/>
         <LogoutMenu logoutButton={logoutButton} />
-          {children}
+        <main>
+          <Posts/>
+        </main>
       </Private>
       : <Navigate to="/" />}
     </>
   );
 }
 
-const Private = styled.section`
-> section {
-  margin: 70px 18px 111px 18px;
+const Private = styled.section` > main {
+  width: 100%;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 main > div {
   width: 100%;
   height: 94px;
@@ -68,21 +71,13 @@ main > div > div {
   flex-direction: column;
   justify-content: space-between;
 }
-.calendar {
-  width: 100%;
-  height: 250px;
-  padding: 0;
-}
 form {
-  width: 100%;
-  height: 180px;
-  background-color: #FFFFFF;
-  border-radius: 5px;
-  padding: 18px 18px 15px 18px;
-  margin-bottom: 29px;
+  width: 503px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
   box-sizing: border-box;
 }
 span {

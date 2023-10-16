@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
-export default function Header ( {username, photo, logoutButton, setLogoutButton} ) {
+export default function Header ( {logoutButton, setLogoutButton} ) {
+  const { username, photo } = useContext(UserContext).authData;
 
   return (
     <Top>
@@ -9,7 +12,7 @@ export default function Header ( {username, photo, logoutButton, setLogoutButton
       <button onClick={() => setLogoutButton(!logoutButton)} >
         { !logoutButton ? <UpArrow/> : <DownArrow/> }
         <h6>Olá,<br/>{username}!</h6>
-        <img data-test="avatar" src={photo} alt="" />
+        <img data-test="avatar" src={photo} alt="user profile image" />
       </button>
     </Top>       
   );

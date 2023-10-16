@@ -22,12 +22,14 @@ export default function Button ( {
 const Wrapper = styled.button`
 width: ${props => (
   (props.size === "large") ? "100%"
-  : (props.size === "small") ? "84px"
+  : (props.size === "small") ? "112px"
   : "40px")};
 height: ${props => (
-  (props.size === "large") ? "65px"
+  (props.size === "large") ? "31px"
   : "35px")};
-border-radius: 6px;
+border-radius: ${props => (
+(props.size === "large") ? "6px"
+: "5px")};
 background: #1877F2;
 cursor: pointer;
 display: flex;
@@ -36,18 +38,15 @@ justify-content: center;
 box-sizing: border-box;
 
 p {
+  font-family: ${props => (
+  (props.size === "large") ? 'Oswald'
+  : (props.size === "small") ? 'Lato'
+  : 'Passion One')};
   font-size: ${props => (
   (props.size === "large") ? "27px"
-  : (props.size === "small") ? "16px"
+  : (props.size === "small") ? "14px"
   : "27px")};
-  line-height: ${props => (
-  (props.size === "large") ? "normal"
-  : (props.size === "small") ? "20px"
-  : "27px")};
-  font-weight: ${props => (
-  (props.size === "large") ? "700"
-  : (props.size === "small") ? "normal"
-  : "700")};
+  font-weight: 700;
   text-align: center;
   color: #FFFFFF;
 }`;

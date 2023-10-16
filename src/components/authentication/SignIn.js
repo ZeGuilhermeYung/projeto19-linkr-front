@@ -42,16 +42,35 @@ export default function SignIn () {
   return (
     <>
       { authData ? <Navigate to="/timeline" />
-        : <AuthScreen>
-            <form onSubmit={handleSubmit} >
-              <Input dataTest="email" type="email" name="email" onChange={handleInput} value={form.email} placeholder="e-mail" disabled={disabled} />
-              <Input dataTest="password" type="password" name="password" onChange={handleInput} value={form.password} placeholder="password" disabled={disabled} />
-              {disabled ? <Loading size="large" /> : <Button dataTest="login-btn" title="Log In" size="large" disabled={disabled} />}
-            </form>
-            <Link data-test="sign-up-link" to="/sign-up" >
-              <h6>First time? Create an account!</h6>
-            </Link> 
-          </AuthScreen>}
+          : <AuthScreen>
+              <form onSubmit={handleSubmit} >
+                <Input
+                  dataTest="email"
+                  type="email"
+                  name="email"
+                  onChange={handleInput}
+                  value={form.email}
+                  placeholder="e-mail"
+                  disabled={disabled} />
+                <Input
+                  dataTest="password"
+                  type="password"
+                  name="password"
+                  onChange={handleInput}
+                  value={form.password}
+                  placeholder="password"
+                  disabled={disabled} />
+                {disabled ? <Loading size="large" />
+                  : <Button
+                    dataTest="login-btn"
+                    title="Log In"
+                    size="large"
+                    disabled={disabled} />}
+              </form>
+              <Link data-test="sign-up-link" to="/sign-up" >
+                <h6>First time? Create an account!</h6>
+              </Link> 
+            </AuthScreen>}
     </>
   );
 }

@@ -9,14 +9,14 @@ import HomePage from "./home/HomePage";
 
 export default function App () {
   const [token, setToken] = useState(localStorage.getItem("userData"));
-  const [progressHabits, setProgressHabits] = useState(0);
+  const authData = JSON.parse(localStorage.getItem("userData"));
   
   return (
     <>
       <GlobalStyle />
       <BrowserRouter >
         <AuthContext.Provider value={{ token, setToken }}>
-        <UserContext.Provider value={{ progressHabits, setProgressHabits }}>
+        <UserContext.Provider value={{ authData }}>
           <Routes >
             <Route path="/" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />

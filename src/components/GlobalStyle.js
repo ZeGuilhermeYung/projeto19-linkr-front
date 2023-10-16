@@ -50,6 +50,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+input {
+  all:unset;
+}
+textarea {
+  all:unset;
+}
 button {
   all: unset;
   cursor: pointer;
