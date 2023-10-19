@@ -43,8 +43,8 @@ button {
 }
 
 button img {
-  width: 51px;
-  height: 51px;
+  width: 53px;
+  height: 53px;
   border-radius: 50%;
   object-fit: cover;
 }

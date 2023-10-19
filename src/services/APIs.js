@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const urlAPI = process.env.REACT_APP_API_URL;
+const CORS_PROXY = "https://corsproxy.io/?";
 
 function userHeaders () {
   const authToken = JSON.parse(localStorage.getItem("userData"));
@@ -28,19 +29,16 @@ function publishPost (body) {
   return promise;
 }
 
-function getTodayHabits () {
+function getPosts () {
   const config = userHeaders();
-  const promise = axios.get(`${urlAPI}/habits/today`, config);
+  const promise = axios.get(`${urlAPI}/timeline`, config);
   return promise;
 }
 
-function getHabits () {
-  const config = userHeaders();
-  const promise = axios.get(`${urlAPI}/habits`, config);
+function getCorsProxyUrl (url) {
+  const promise = axios.get(`${CORS_PROXY}${url}`);
   return promise;
 }
-
-
 
 function deleteHabit(habitId) {
   const config = userHeaders();
@@ -68,4 +66,4 @@ function getHistory() {
   return promise;
 }
 
-export { userHeaders, signInUser, signUpUser, publishPost, getTodayHabits, getHabits, deleteHabit, checkHabit, uncheckHabit, getHistory }
+export { userHeaders, signInUser, signUpUser, publishPost, getPosts, getCorsProxyUrl }

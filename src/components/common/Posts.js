@@ -1,7 +1,22 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import PublishPost from "./PublishPost";
+import Post from "./Post";
+import { getPosts } from "../../services/APIs";
 
 export default function Posts ( {} ) {
+  const [posts, setPosts] = useState([]);
+  
+  useEffect(() => {
+    getPosts()
+    .then(response => {
+			setPosts(response.data);
+		})
+    .catch((error) => {
+      alert(error.message);
+    });
+	}, []);
+
   return (
     <Article>
       <Title>
@@ -9,6 +24,15 @@ export default function Posts ( {} ) {
       </Title>
       <PostsSection>
         <PublishPost/>
+        {(posts.length === 0) ? <h3>There are no posts yet</h3>
+            : posts.map((post, index) =>
+            <Post
+              key={index}
+              id={post.id}
+              userId={post.userId}
+              url={post.url}
+              description={post.description} 
+              likes={post.likes} />)}
       </PostsSection>
     </Article>
   );
@@ -45,7 +69,6 @@ form {
   background-color: #FFFFFF;
   border-radius: 5px;
   padding: 18px 18px 15px 18px;
-  margin-bottom: 29px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -55,6 +78,10 @@ span {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+h3 {
+  font-size: 24px;
+  font-weight: 400;
 }
 span h5 {
   margin-right: 23px;
