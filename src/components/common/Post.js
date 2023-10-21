@@ -68,7 +68,7 @@ export default function Post ( { id, userId, url, description, likes } ) {
     const fetchData = async () => {
       const newUrl = getUrl(url);
       try {
-        const response = await getCorsProxyUrl(url);
+        const response = await getCorsProxyUrl(newUrl);
         const html = response.data;
         const meta = await parseHTML(html);
         const data = await getPreviewData(meta);
@@ -85,28 +85,36 @@ export default function Post ( { id, userId, url, description, likes } ) {
 
   return (
     <Section data-test="post">
-      <div>
-        <img  alt="user profile image" />
-        { like ? <HeartFull/> : <HeartEmpty/> }
-        <h6>{likeCount} likes</h6>
-      </div>
-      <div>
+      <LikesDiv>
         <div>
-          
+          <img  alt="user profile image" />
+          { like ? <HeartFull/> : <HeartEmpty/> }
+          <h6>{likeCount} likes</h6>
+        </div>
+      </LikesDiv>
+      <LinkContent>
+        <CardHeader>
+          <h4>Nome do Usuário</h4>
           <div>
             <EditButton/>
             <DeleteButton/>
           </div>
-        </div>
+        </CardHeader>
         <DescriptionBox>
           <h5>{description}</h5>
         </DescriptionBox>
         {previewData ?
           <UrlBox>
             <TextBox>
-              <Title>{previewData.title}</Title>
-              <h5>{previewData.description}</h5>
-              <h6>{url}</h6>
+              <DivTitle>
+                <Title>{previewData.title}</Title>
+              </DivTitle>
+              <DivDescription>
+                <Description>{previewData.description}</Description>
+              </DivDescription>
+              <DivUrl>
+                <h6>{url}</h6>
+              </DivUrl>    
             </TextBox>
             <ImageUrl>
               <LinkImage
@@ -115,18 +123,62 @@ export default function Post ( { id, userId, url, description, likes } ) {
             </ImageUrl>
           </UrlBox>
         : <h4>Caregando...</h4>}       
-      </div>
+      </LinkContent>
     </Section>
   );
 }
 
 const Section = styled.section`
   width: 100%;
-  height: 209px;
+  height: 276px;
   border-radius: 16px;
   background-color: #171717;  
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 16px 22px 16px 18px;
+  padding: 16px 22px 16px 0;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;`
+
+const LikesDiv = styled.div`
+  width: 87px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  div {
+    width: 100%;
+    height: 93px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 19px;
+  }
+  h6 {
+    margin-top: 4px;
+  }`
+
+const LinkContent = styled.figure`
+  width: 503px;
+  height: 194px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;`
+
+const CardHeader = styled.div`
+  width: 100%;
+  height: 23px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,21 +187,24 @@ const Section = styled.section`
 const DescriptionBox = styled.div`
   width: 100%;
   height: 52px;
-  border-radius: 16px;
+  margin: 8px 0 10px 0;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   box-sizing: border-box;`
 
 const TextBox = styled.div`
   width: 100%;
   height: 100%;
-  padding: 24px 27px 43px 20px;
-  align-items: center;
+  padding: 23px 27px 43px 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   box-sizing: border-box;`
 
 const UrlBox = styled.div`
-  width: 503px;
+  width: 100%;
   height: 155px;
   border-radius: 11px;
   border: 1px solid #4D4D4D;
@@ -159,11 +214,55 @@ const UrlBox = styled.div`
   justify-content: space-between;
   box-sizing: border-box;`
 
-const Title = styled.h5`
+const DivTitle = styled.div`
   width: 250px;
   height: 38px;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;`
+
+const Title = styled.h5`
+  width: 100%;
+  height: 100%;
+  text-align: left;
   font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;     
   color: #CECECE;`
+
+const DivDescription = styled.div`
+  width: 303px;
+  height: 39px;
+  margin: 5px 0 13px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-sizing: border-box;`
+
+const Description = styled.h6`
+  width: 303px;
+  height: 39px;
+  color: #9B9595;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;`
+
+const DivUrl = styled.div`
+  width: 303px;
+  height: 13px;
+  h6 {
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}`
   
 const ImageUrl = styled.div` 
   width: 155px;
@@ -187,29 +286,14 @@ const HeartFull = styled(FaHeart)`
   color: #FFFFFF;`
 
 const EditButton = styled(PiPencilBold)`
-  font-size: 40px;
+  font-size: 17px;
   color: #FFFFFF;
   margin-right: 10px;`
 
 const DeleteButton = styled(TbTrashFilled)`
-  font-size: 40px;
+  font-size: 17px;
   color: #FFFFFF;
 
-div {
-  width: 68px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
 p {
   font-family: 'Lato';
   font-size: 14px;

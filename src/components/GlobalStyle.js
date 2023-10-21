@@ -103,6 +103,7 @@ h6 {
   text-align: center;
   font-family: 'Lato';
   font-size: 11px;
+  text-align: left;
 }
 ::placeholder, ::-webkit-input-placeholder, :-webkit-autofill {
   font-size: 27px;
