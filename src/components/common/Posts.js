@@ -32,7 +32,9 @@ export default function Posts ( {} ) {
               userId={post.userId}
               url={post.url}
               description={post.description} 
-              likes={post.likes} />)}
+              likes={post.likes}
+              username={post.username}
+              photo={post.photo} />)}
       </PostsSection>
     </Article>
   );

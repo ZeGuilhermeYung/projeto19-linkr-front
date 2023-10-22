@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { PiPencilBold } from "react-icons/pi";
 import { TbTrashFilled } from "react-icons/tb";
 import { getCorsProxyUrl } from "../../services/APIs";
 import noImage from "../../assets/img/no_image.png";
+import LikeHeart from "./LikeHeart";
 
 const getPreviewData = (tags) => {
   const result = tags.reduce((previewData, item) => {
@@ -57,7 +57,7 @@ const getUrl = (text) => {
   return url;
 };
 
-export default function Post ( { id, userId, url, description, likes } ) {
+export default function Post ( { id, userId, url, description, likes, username, photo } ) {
   const [disabled, setDisabled] = useState(false);
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(likes ? likes.length : 0);
@@ -87,14 +87,16 @@ export default function Post ( { id, userId, url, description, likes } ) {
     <Section data-test="post">
       <LikesDiv>
         <div>
-          <img  alt="user profile image" />
-          { like ? <HeartFull/> : <HeartEmpty/> }
+          <img src={photo} alt="user profile image" />
+            <LikeHeart
+              like={like}
+              setLike={setLike} />
           <h6>{likeCount} likes</h6>
         </div>
       </LikesDiv>
       <LinkContent>
         <CardHeader>
-          <h4>Nome do Usuário</h4>
+          <h4>{username}</h4>
           <div>
             <EditButton/>
             <DeleteButton/>
@@ -135,7 +137,7 @@ const Section = styled.section`
   background-color: #171717;  
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 16px 22px 16px 0;
-  margin-top: 16px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -150,7 +152,6 @@ const LikesDiv = styled.div`
   justify-content: flex-start;
   div {
     width: 100%;
-    height: 93px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -167,12 +168,12 @@ const LikesDiv = styled.div`
     margin-top: 4px;
   }`
 
-const LinkContent = styled.figure`
+const LinkContent = styled.div`
   width: 503px;
-  height: 194px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;`
 
@@ -276,14 +277,6 @@ const LinkImage = styled.img`
   border-radius: 0px 12px 13px 0px;
   object-fit: cover;
   box-sizing: border-box;`
-
-const HeartEmpty = styled(FaRegHeart)`
-  font-size: 20px;
-  color: #FFFFFF;`
-
-const HeartFull = styled(FaHeart)`
-  font-size: 20px;
-  color: #FFFFFF;`
 
 const EditButton = styled(PiPencilBold)`
   font-size: 17px;

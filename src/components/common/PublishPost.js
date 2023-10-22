@@ -79,6 +79,7 @@ border-radius: 16px;
 background-color: #FFFFFF;  
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 padding: 16px 22px 16px 18px;
+margin-bottom: 29px;
 display: flex;
 align-items: center;
 justify-content: space-between;
