@@ -8,20 +8,23 @@ import noImage from "../../assets/img/no_image.png";
 import LikeHeart from "./LikeHeart";
 
 const getPreviewData = (tags) => {
-  const result = tags.reduce((previewData, item) => {
-      switch(item.tag) {
-        case 'og:title': previewData.title = item.value;
-          break;
-        case 'og:description': previewData.description = item.value;
-          break;
-        case 'og:image': previewData.image = item.value;
-          break;
-        default: break;
+  const previewData = tags.reduce((data, item) => {
+    const { tag, value } = item;
+    // Verifique se o item tem tanto 'name' quanto 'content'
+    if (tag && value) {
+      // Verifique se o nome do atributo contém um prefixo desejado
+      if (tag.startsWith('og:') || tag.startsWith('twitter:')) {
+        const attributeName = tag.split(':').pop(); // Remove o prefixo
+        data[attributeName] = value;
+      } else {
+        // Se a tag não tiver um prefixo, use a tag diretamente
+        data[tag] = value;
       }
-    return previewData;
+    }
+    return data;
   }, {});
 
-  return Promise.resolve(result);
+  return Promise.resolve(previewData);
 }
 
 const parseHTML = (html) => {
@@ -31,6 +34,9 @@ const parseHTML = (html) => {
       onopentag(name, attribs) {
         if (name === 'meta' && attribs.property && attribs.content) {
           meta.push({ tag: attribs.property, value: attribs.content });
+        } else if (attribs.name && attribs.content) {
+          // Se 'property' não está definido, use 'name' e 'content'
+          meta.push({ tag: attribs.name, value: attribs.content });
         }
       },
       onend() {
@@ -80,7 +86,6 @@ export default function Post ( {
         const response = await getCorsProxyUrl(newUrl);
         const html = response.data;
         const meta = await parseHTML(html);
-        console.log(meta); 
         const data = await getPreviewData(meta);
 
         setPreviewData(data);
@@ -295,11 +300,13 @@ const LinkImage = styled.img`
 const EditButton = styled(PiPencilBold)`
   font-size: 17px;
   color: #FFFFFF;
-  margin-right: 10px;`
+  margin-right: 10px;
+  cursor: pointer;`
 
 const DeleteButton = styled(TbTrashFilled)`
   font-size: 17px;
   color: #FFFFFF;
+  cursor: pointer;
 
 p {
   font-family: 'Lato';
