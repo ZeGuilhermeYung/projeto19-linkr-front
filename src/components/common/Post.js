@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Parser } from "htmlparser2";
 import styled from "styled-components";
 import { PiPencilBold } from "react-icons/pi";
 import { TbTrashFilled } from "react-icons/tb";
@@ -24,23 +25,23 @@ const getPreviewData = (tags) => {
 }
 
 const parseHTML = (html) => {
-  const cheerio = require('cheerio');
-  const $ = cheerio.load(html);
+  return new Promise((resolve, reject) => {
+    const meta = [];
+    const parser = new Parser({
+      onopentag(name, attribs) {
+        if (name === 'meta' && attribs.property && attribs.content) {
+          meta.push({ tag: attribs.property, value: attribs.content });
+        }
+      },
+      onend() {
+        resolve(meta);
+      },
+    });
 
-  const meta = [];
-  $ ('head meta').map((i, item) => {
-    if (!item.attribs) return null;
-
-    const property = item.attribs.property || null;
-    const content = item.attribs.content || null;
-
-    if (!property || !content) return null;
-
-    meta.push({ tag: property, value: content });
+    parser.write(html);
+    parser.end();
   });
-
-  return Promise.resolve(meta);
-}
+};
 
 const getUrl = (text) => {
   const a = document.createElement('a');
@@ -57,7 +58,15 @@ const getUrl = (text) => {
   return url;
 };
 
-export default function Post ( { id, userId, url, description, likes, username, photo } ) {
+export default function Post ( {
+  id,
+  userId,
+  url,
+  description,
+  likes,
+  username,
+  photo,
+  setRefreshPosts} ) {
   const [disabled, setDisabled] = useState(false);
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(likes ? likes.length : 0);
@@ -71,6 +80,7 @@ export default function Post ( { id, userId, url, description, likes, username, 
         const response = await getCorsProxyUrl(newUrl);
         const html = response.data;
         const meta = await parseHTML(html);
+        console.log(meta); 
         const data = await getPreviewData(meta);
 
         setPreviewData(data);
@@ -106,7 +116,11 @@ export default function Post ( { id, userId, url, description, likes, username, 
           <h5>{description}</h5>
         </DescriptionBox>
         {previewData ?
-          <UrlBox>
+          <UrlBox
+            href={url}
+            target="_blank"
+            onClick={() => {
+              window.open(url, '_blank')}} >
             <TextBox>
               <DivTitle>
                 <Title>{previewData.title}</Title>
@@ -193,6 +207,17 @@ const DescriptionBox = styled.div`
   justify-content: flex-start;
   box-sizing: border-box;`
 
+const UrlBox = styled.button`
+  width: 100%;
+  height: 155px;
+  border-radius: 11px;
+  border: 1px solid #4D4D4D;
+  background-color: rgba(196, 196, 196, 0.00);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;`
+
 const TextBox = styled.div`
   width: 100%;
   height: 100%;
@@ -201,17 +226,6 @@ const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  box-sizing: border-box;`
-
-const UrlBox = styled.div`
-  width: 100%;
-  height: 155px;
-  border-radius: 11px;
-  border: 1px solid #4D4D4D;
-  background-color: rgba(196, 196, 196, 0.00);
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   box-sizing: border-box;`
 

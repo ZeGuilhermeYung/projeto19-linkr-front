@@ -12,8 +12,7 @@ export default function Button ( {
       title={title}
       size={size}
       onClick={clickFunction}
-      disabled={disabled}
-    >
+      disabled={disabled} >
       <p>{title}</p>
     </Wrapper>
   );
@@ -25,8 +24,8 @@ width: ${props => (
   : (props.size === "small") ? "112px"
   : "40px")};
 height: ${props => (
-  (props.size === "large") ? "31px"
-  : "35px")};
+  (props.size === "large") ? "65px"
+  : "31px")};
 border-radius: ${props => (
 (props.size === "large") ? "6px"
 : "5px")};

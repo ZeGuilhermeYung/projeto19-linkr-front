@@ -11,10 +11,8 @@ export default function LikeHeart ( {
       data-test="like-btn"
       onClick={() => setLike(!like)} >
       {like ?
-        <HeartFull
-        like={like} />
-      : <HeartEmpty
-        like={like} />}
+        <HeartFull />
+      : <HeartEmpty />}
     </LikeButton>
   );
 }

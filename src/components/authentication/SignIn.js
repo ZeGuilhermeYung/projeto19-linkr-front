@@ -62,10 +62,10 @@ export default function SignIn () {
                   disabled={disabled} />
                 {disabled ? <Loading size="large" />
                   : <Button
-                    dataTest="login-btn"
-                    title="Log In"
-                    size="large"
-                    disabled={disabled} />}
+                      dataTest="login-btn"
+                      title="Log In"
+                      size="large"
+                      disabled={disabled} />}
               </form>
               <Link data-test="sign-up-link" to="/sign-up" >
                 <h6>First time? Create an account!</h6>

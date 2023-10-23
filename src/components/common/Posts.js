@@ -4,18 +4,20 @@ import PublishPost from "./PublishPost";
 import Post from "./Post";
 import { getPosts } from "../../services/APIs";
 
-export default function Posts ( {} ) {
+export default function Posts () {
   const [posts, setPosts] = useState([]);
+  const [refreshPosts, setRefreshPosts] = useState(false);
   
   useEffect(() => {
     getPosts()
     .then(response => {
 			setPosts(response.data);
+      setRefreshPosts(false);
 		})
     .catch((error) => {
       alert(error.message);
     });
-	}, []);
+	}, [refreshPosts]);
 
   return (
     <Article>
@@ -23,7 +25,8 @@ export default function Posts ( {} ) {
         <h2>timeline</h2>
       </Title>
       <PostsSection>
-        <PublishPost/>
+        <PublishPost
+          setRefreshPosts={setRefreshPosts} />
         {(posts.length === 0) ? <h3>There are no posts yet</h3>
             : posts.map((post, index) =>
             <Post
@@ -34,7 +37,8 @@ export default function Posts ( {} ) {
               description={post.description} 
               likes={post.likes}
               username={post.username}
-              photo={post.photo} />)}
+              photo={post.photo}
+              setRefreshPosts={setRefreshPosts} />)}
       </PostsSection>
     </Article>
   );

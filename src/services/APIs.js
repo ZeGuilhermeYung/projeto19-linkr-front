@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const urlAPI = process.env.REACT_APP_API_URL;
-const CORS_PROXY = "https://corsproxy.io/?";
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 function userHeaders () {
   const authToken = JSON.parse(localStorage.getItem("userData"));

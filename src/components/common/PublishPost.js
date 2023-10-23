@@ -6,7 +6,7 @@ import Button from "./Button";
 import { publishPost } from "../../services/APIs";
 
 
-export default function PublishPost ( {} ) {
+export default function PublishPost ( {setRefreshPosts} ) {
   const { photo } = useContext(UserContext).authData;
   const [disabled, setDisabled] = useState(false);
   const [form, setForm] = useState({
@@ -29,6 +29,7 @@ export default function PublishPost ( {} ) {
           url: "",
           description: ""
         });
+        setRefreshPosts(true);
         setDisabled(false);
       })
       .catch((error) => {
@@ -63,10 +64,10 @@ export default function PublishPost ( {} ) {
           disabled={disabled} />
         {disabled ? <p>Publishing...</p>
           : <Button
-            dataTest="publish-btn"
-            title="Publish"
-            size="small"
-            disabled={disabled} />}
+              dataTest="publish-btn"
+              title="Publish"
+              size="small"
+              disabled={disabled} />}
       </form>
     </Section>
   );

@@ -14,10 +14,10 @@ export default function App () {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter >
+      <BrowserRouter>
         <AuthContext.Provider value={{ token, setToken }}>
         <UserContext.Provider value={{ authData }}>
-          <Routes >
+          <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route
