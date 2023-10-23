@@ -1,4 +1,4 @@
-import { useState , useContext } from "react";
+import { useState , useContext, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/APIs.js";
@@ -6,12 +6,19 @@ import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
 export default function SignIn () {
   const { setToken } = useContext(AuthContext);
+  const authData = localStorage.getItem("userData");
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: ""
   });
+
+  useEffect(() => {
+    if (authData) {
+      navigate("/timeline");
+    }
+  }, [authData, navigate]);
 
   function handleInput (event) {
     setForm( {...form, [event.target.name]: event.target.value} );
