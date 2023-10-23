@@ -1,6 +1,6 @@
 import { useState , useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/APIs.js";
 import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
@@ -8,7 +8,6 @@ export default function SignIn () {
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
-  const authData = JSON.parse(localStorage.getItem("userData"));
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -31,7 +30,7 @@ export default function SignIn () {
           photo: res.data.photo
         });
         localStorage.setItem("userData", userAuth);
-        navigate("/");
+        navigate("/timeline");
       })
       .catch((error) => {
         alert(error.message);
@@ -40,37 +39,34 @@ export default function SignIn () {
   }
 
   return (
-    <>
-      { authData ? <Navigate to="/timeline" />
-          : <AuthScreen>
-              <form onSubmit={handleSubmit} >
-                <Input
-                  dataTest="email"
-                  type="email"
-                  name="email"
-                  onChange={handleInput}
-                  value={form.email}
-                  placeholder="e-mail"
-                  disabled={disabled} />
-                <Input
-                  dataTest="password"
-                  type="password"
-                  name="password"
-                  onChange={handleInput}
-                  value={form.password}
-                  placeholder="password"
-                  disabled={disabled} />
-                {disabled ? <Loading size="large" />
-                  : <Button
-                      dataTest="login-btn"
-                      title="Log In"
-                      size="large"
-                      disabled={disabled} />}
-              </form>
-              <Link data-test="sign-up-link" to="/sign-up" >
-                <h6>First time? Create an account!</h6>
-              </Link> 
-            </AuthScreen>}
-    </>
+    <AuthScreen>
+      <form onSubmit={handleSubmit} >
+        <Input
+          dataTest="email"
+          type="email"
+          name="email"
+          onChange={handleInput}
+          value={form.email}
+          placeholder="e-mail"
+          disabled={disabled} />
+        <Input
+          dataTest="password"
+          type="password"
+          name="password"
+          onChange={handleInput}
+          value={form.password}
+          placeholder="password"
+          disabled={disabled} />
+        {disabled ? <Loading size="large" />
+          : <Button
+              dataTest="login-btn"
+              title="Log In"
+              size="large"
+              disabled={disabled} />}
+      </form>
+      <Link data-test="sign-up-link" to="/sign-up" >
+        <h6>First time? Create an account!</h6>
+      </Link> 
+    </AuthScreen>
   );
 }
