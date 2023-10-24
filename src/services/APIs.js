@@ -49,6 +49,12 @@ function getPosts () {
   return promise;
 }
 
+function deletePost (body) {
+  const config = userHeaders();
+  const promise = axios.delete(`${urlAPI}/timeline`, body, config);
+  return promise;
+}
+
 function getCorsProxyUrl(url, proxyIndex = 0) {
   const proxyUrl = CORS_PROXY_LIST[proxyIndex] + url;
   return axios.get(proxyUrl)
@@ -89,4 +95,4 @@ function getHistory() {
   return promise;
 }
 
-export { userHeaders, signInUser, signUpUser, publishPost, getPosts, getCorsProxyUrl }
+export { userHeaders, signInUser, signUpUser, publishPost, getPosts, deletePost, getCorsProxyUrl }

@@ -62,12 +62,13 @@ const getUrl = (text) => {
 
 export default function Post ( {
   id,
-  userId,
+  authorId,
   url,
   description,
   likes,
   username,
   photo,
+  myUserId,
   setRefreshPosts} ) {
   const [disabled, setDisabled] = useState(false);
   const [like, setLike] = useState(false);
@@ -108,10 +109,13 @@ export default function Post ( {
       <LinkContent>
         <CardHeader>
           <h4>{username}</h4>
-          <div>
-            <EditButton/>
-            <DeleteButton/>
-          </div>
+          {myUserId === authorId ?
+            <div>
+              <EditButton/>
+              <DeleteButton/>
+            </div>
+            : null
+          }
         </CardHeader>
         <DescriptionBox>
           <h5>{description}</h5>

@@ -7,11 +7,13 @@ import { getPosts } from "../../services/APIs";
 export default function Posts () {
   const [posts, setPosts] = useState([]);
   const [refreshPosts, setRefreshPosts] = useState(false);
-  
+  const [myUserId, setMyUserId] = useState(0);
+
   useEffect(() => {
     getPosts()
     .then(response => {
-			setPosts(response.data);
+			setPosts(response.data.posts);
+      setMyUserId(response.data.myUserId)
       setRefreshPosts(false);
 		})
     .catch((error) => {
@@ -32,12 +34,13 @@ export default function Posts () {
             <Post
               key={index}
               id={post.id}
-              userId={post.userId}
+              authorId={post.authorId}
               url={post.url}
               description={post.description} 
               likes={post.likes}
               username={post.username}
               photo={post.photo}
+              myUserId={myUserId}
               setRefreshPosts={setRefreshPosts} />)}
       </PostsSection>
     </Article>
