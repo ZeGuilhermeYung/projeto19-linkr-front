@@ -1,13 +1,14 @@
 import { useState , useContext, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
+import UserContext from "../../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/APIs.js";
 import { AuthScreen, Button, Input, Loading } from "../common/index.js";
 
 export default function SignIn () {
-  const { setToken } = useContext(AuthContext);
-  const authData = localStorage.getItem("userData");
   const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(UserContext);
   const [disabled, setDisabled] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -37,6 +38,7 @@ export default function SignIn () {
           photo: res.data.photo
         });
         localStorage.setItem("userData", userAuth);
+        setAuthData(userAuth);
         navigate("/timeline");
       })
       .catch((error) => {

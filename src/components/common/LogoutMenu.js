@@ -6,10 +6,10 @@ import AuthContext from "../../context/AuthContext";
 export default function LogoutMenu ( { logoutButton } ) {
   const { setToken } = useContext(AuthContext);
 
-  function logout() {
+  const logout = () => {
     localStorage.removeItem("userData");
     setToken(undefined);
-  }
+  };
 
   return (
     <>

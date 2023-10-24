@@ -53,12 +53,11 @@ function getCorsProxyUrl(url, proxyIndex = 0) {
   const proxyUrl = CORS_PROXY_LIST[proxyIndex] + url;
   return axios.get(proxyUrl)
     .catch(error => {
-      console.log(error.message, `Falha em acessar ${CORS_PROXY_LIST[proxyIndex]}`)
+      //console.log(error.message, `Falha em acessar ${CORS_PROXY_LIST[proxyIndex]}`)
       const nextProxyIndex = proxyIndex + 1;
       if (nextProxyIndex < CORS_PROXY_LIST.length) {
         return getCorsProxyUrl(url, nextProxyIndex);
       } else {
-        // Se todos os proxies falharem, retorne um erro ou faça o tratamento apropriado
         throw new Error('Todos os proxies falharam');
       }
     });

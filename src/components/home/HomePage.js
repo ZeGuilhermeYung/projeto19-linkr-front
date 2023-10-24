@@ -6,8 +6,7 @@ import Header from "./Header";
 import { LogoutMenu } from "../common";
 import { Posts } from "../common";
 
-export default function HomePage ({ children }) {
-  require("dayjs/locale/pt-br");
+export default function HomePage () {
   const { authData } = useContext(UserContext);
   const [logoutButton, setLogoutButton] = useState(false);
   const privateRef = useRef(null);
@@ -28,14 +27,15 @@ export default function HomePage ({ children }) {
 
   return (
     <>
-    {authData ? 
+    {authData ?
       <Private
         ref={privateRef} 
         onClick={() => {if (logoutButton) setLogoutButton(false)}} >
         <Header
           logoutButton={logoutButton}
           setLogoutButton={setLogoutButton}/>
-        <LogoutMenu logoutButton={logoutButton} />
+        <LogoutMenu
+          logoutButton={logoutButton} />
         <main>
           <Posts/>
         </main>

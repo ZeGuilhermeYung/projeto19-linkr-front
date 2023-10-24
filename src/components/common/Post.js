@@ -10,14 +10,11 @@ import LikeHeart from "./LikeHeart";
 const getPreviewData = (tags) => {
   const previewData = tags.reduce((data, item) => {
     const { tag, value } = item;
-    // Verifique se o item tem tanto 'name' quanto 'content'
     if (tag && value) {
-      // Verifique se o nome do atributo contém um prefixo desejado
       if (tag.startsWith('og:') || tag.startsWith('twitter:')) {
-        const attributeName = tag.split(':').pop(); // Remove o prefixo
+        const attributeName = tag.split(':').pop();
         data[attributeName] = value;
       } else {
-        // Se a tag não tiver um prefixo, use a tag diretamente
         data[tag] = value;
       }
     }
@@ -35,7 +32,6 @@ const parseHTML = (html) => {
         if (name === 'meta' && attribs.property && attribs.content) {
           meta.push({ tag: attribs.property, value: attribs.content });
         } else if (attribs.name && attribs.content) {
-          // Se 'property' não está definido, use 'name' e 'content'
           meta.push({ tag: attribs.name, value: attribs.content });
         }
       },
